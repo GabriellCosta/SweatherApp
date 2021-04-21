@@ -30,4 +30,6 @@ dependencies {
     implementation(project(Modules.main))
     implementation(project(Modules.Library.Network.public))
     implementation(project(Modules.Library.Network.impl))
+
+    implementation(Dependencies.koin)
 }
