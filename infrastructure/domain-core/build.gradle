@@ -1,4 +1,5 @@
 import dependencies.Dependencies
+import dependencies.TestDependencies
 
 apply plugin: 'kotlin'
 
@@ -7,4 +8,7 @@ dependencies {
 
     implementation Dependencies.retrofit
     implementation Dependencies.Coroutines.core
+
+    testImplementation(TestDependencies.jUnit)
+    testImplementation(TestDependencies.mockk)
 }
