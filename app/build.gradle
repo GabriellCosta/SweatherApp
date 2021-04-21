@@ -4,20 +4,23 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
-
+    compileSdkVersion AndroidConfig.compileSdk
     defaultConfig {
-        applicationId "dev.tigrao.sweather"
-        minSdkVersion 19
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId AndroidConfig.applicationId
+        minSdkVersion AndroidConfig.minSdk
+        targetSdkVersion AndroidConfig.compileSdk
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
+        testInstrumentationRunner AndroidConfig.instrumentationTestRunner
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".debug"
+            versionNameSuffix ' - Debug'
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
