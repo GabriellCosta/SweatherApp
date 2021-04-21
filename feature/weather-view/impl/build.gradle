@@ -1,0 +1,19 @@
+import dependencies.Dependencies
+import dependencies.Modules
+import dependencies.TestDependencies
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+apply from: "$rootDir/quality/modules/android_module.gradle"
+
+dependencies {
+    implementation Dependencies.kotlinStdlib
+
+    implementation(project(Modules.Features.WeatherView.public))
+
+    testImplementation(TestDependencies.jUnit)
+    testImplementation(TestDependencies.mockk)
+}
