@@ -30,5 +30,9 @@ val networkImplModule = module {
         RetryCallAdapterFactory()
     } bind CallAdapter.Factory::class
 
-    factory<Interceptor> { ApiKeyInterceptor() } bind Interceptor::class
+    factory<Interceptor> {
+        ApiKeyInterceptor(
+            token = BuildConfig.API_TOKEN
+        )
+    } bind Interceptor::class
 }

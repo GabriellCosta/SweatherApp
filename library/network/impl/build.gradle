@@ -12,7 +12,7 @@ apply from: "$rootDir/quality/modules/android_module.gradle"
 android {
     defaultConfig {
         buildConfigField("String", "API_URL", "\"https://api.openweathermap.org/data/2.5\"")
-        buildConfigField "String", "API_TOKEN", project.property("WEATHER_API_KEY")
+        buildConfigField "String", "API_TOKEN", "\"${WEATHER_API_KEY}\""
     }
 }
 
@@ -25,4 +25,7 @@ dependencies {
     implementation Dependencies.okhttp
     implementation Dependencies.okhttpLogger
     implementation Dependencies.koin
+
+    testImplementation(TestDependencies.jUnit)
+    testImplementation(TestDependencies.mockk)
 }
