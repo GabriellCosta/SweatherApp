@@ -92,11 +92,6 @@ object Dependencies {
     const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
     const val viewModelExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.livedata}"
 
-    const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
-    const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
-    const val rxRetrofitAdapter =
-        "com.squareup.retrofit2:adapter-rxjava2:${Versions.rxRetrofitAdapter}"
-
     const val constraintLayout =
         "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 

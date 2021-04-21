@@ -1,6 +1,6 @@
 object AndroidConfig {
 
-    const val applicationId = "br.com.hippopotamus.tabarato"
+    const val applicationId = "dev.tigrao.sweather"
 
     const val compileSdk = 30
     const val minSdk = 21
