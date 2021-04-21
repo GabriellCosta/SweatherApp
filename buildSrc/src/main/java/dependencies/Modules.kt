@@ -17,4 +17,8 @@ object Modules {
             const val impl = ":library:network:impl"
         }
     }
+
+    object Infrastructure {
+        const val domainCore = ":infrastructure:domain-core"
+    }
 }
