@@ -5,6 +5,7 @@ import dependencies.TestDependencies
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 apply from: "$rootDir/quality/modules/android_module.gradle"
@@ -13,6 +14,11 @@ dependencies {
     implementation Dependencies.kotlinStdlib
 
     implementation(project(Modules.Features.WeatherView.public))
+    implementation(project(Modules.Library.Network.public))
+
+    Dependencies.Moshi.addLibs(project)
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.Koin.koin)
 
     testImplementation(TestDependencies.jUnit)
     testImplementation(TestDependencies.mockk)

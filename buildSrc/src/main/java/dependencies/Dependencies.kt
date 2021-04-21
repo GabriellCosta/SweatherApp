@@ -15,7 +15,6 @@ internal object Versions {
     const val espressoCore = "3.3.0"
     const val espressoRules = "1.3.0"
     const val roboletric = "4.3.1"
-    const val koin = "2.1.6"
     const val timber = "4.7.1"
     const val livedata = "2.2.0"
     const val constraintLayout = "1.1.3"
@@ -81,10 +80,19 @@ object Dependencies {
     const val materialDesign = "com.google.android.material:material:${Versions.material}"
     const val pullToRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    const val koin = "org.koin:koin-androidx-ext:${Versions.koin}"
-    const val koinScope = "org.koin:koin-androidx-scope:${Versions.koin}"
-    const val koinFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
-    const val koinviewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    object Koin {
+
+        object Versions {
+            const val koin = "2.1.6"
+        }
+
+        const val koin = "org.koin:koin-androidx-ext:${Versions.koin}"
+        const val koinScope = "org.koin:koin-androidx-scope:${Versions.koin}"
+        const val koinFragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
+        const val koinviewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+        const val kointTest = "org.koin:koin-test:${Versions.koin}"
+
+    }
 
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
@@ -104,7 +112,8 @@ object Dependencies {
     object Kirich {
         private const val VERSION = "1.4.1"
 
-        const val viewBindingProperty = "com.kirich1409.viewbindingpropertydelegate:vbpd-noreflection:$VERSION"
+        const val viewBindingProperty =
+            "com.kirich1409.viewbindingpropertydelegate:vbpd-noreflection:$VERSION"
     }
 }
 
@@ -129,8 +138,6 @@ object TestDependencies {
 
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
     const val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
-
-    const val kointTest = "org.koin:koin-test:${Versions.koin}"
 
     const val fixtures = "com.appmattus.fixture:fixture:1.1.0"
 }

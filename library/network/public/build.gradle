@@ -8,5 +8,5 @@ dependencies {
     implementation(Dependencies.Moshi.retrofit)
     implementation Dependencies.okhttp
     implementation Dependencies.okhttpLogger
-    implementation Dependencies.koin
+    implementation Dependencies.Koin.koin
 }

@@ -30,6 +30,7 @@ dependencies {
     implementation(project(Modules.main))
     implementation(project(Modules.Library.Network.public))
     implementation(project(Modules.Library.Network.impl))
+    implementation(project(Modules.Features.WeatherView.impl))
 
-    implementation(Dependencies.koin)
+    implementation(Dependencies.Koin.koin)
 }
