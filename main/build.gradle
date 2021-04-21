@@ -1,0 +1,17 @@
+import dependencies.Dependencies
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+apply from: "$rootDir/quality/modules/android_module.gradle"
+
+dependencies {
+
+    implementation(Dependencies.kotlinStdlib)
+    implementation(Dependencies.fragment)
+    implementation(Dependencies.coreKTX)
+    implementation(Dependencies.constraintLayout)
+    implementation(Dependencies.appCompat)
+}

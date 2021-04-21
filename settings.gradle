@@ -1,3 +1,4 @@
 rootProject.name = "SweatherApp"
 
 include ':app'
+include ':main'
