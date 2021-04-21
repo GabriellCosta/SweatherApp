@@ -4,4 +4,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation Dependencies.kotlinStdlib
+
+    implementation Dependencies.retrofit
+    implementation Dependencies.Coroutines.core
 }
