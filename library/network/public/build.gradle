@@ -1,0 +1,12 @@
+import dependencies.Dependencies
+
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation Dependencies.kotlinStdlib
+    implementation Dependencies.retrofit
+    implementation(Dependencies.Moshi.retrofit)
+    implementation Dependencies.okhttp
+    implementation Dependencies.okhttpLogger
+    implementation Dependencies.koin
+}

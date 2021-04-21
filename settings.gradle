@@ -2,3 +2,5 @@ rootProject.name = "SweatherApp"
 
 include ':app'
 include ':main'
+include ':library:network:public'
+include ':library:network:impl'

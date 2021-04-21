@@ -1,0 +1,21 @@
+import dependencies.Dependencies
+import dependencies.Modules
+import dependencies.TestDependencies
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+apply from: "$rootDir/quality/modules/android_module.gradle"
+
+dependencies {
+    implementation Dependencies.kotlinStdlib
+
+    implementation(project(Modules.Library.Network.public))
+    implementation Dependencies.retrofit
+    implementation(Dependencies.Moshi.retrofit)
+    implementation Dependencies.okhttp
+    implementation Dependencies.okhttpLogger
+    implementation Dependencies.koin
+}

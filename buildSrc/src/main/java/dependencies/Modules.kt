@@ -9,6 +9,9 @@ object Modules {
     }
 
     object Library {
-
+        object Network {
+            const val public = ":library:network:public"
+            const val impl = ":library:network:impl"
+        }
     }
 }
