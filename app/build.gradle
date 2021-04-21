@@ -28,4 +28,6 @@ dependencies {
     implementation(Dependencies.kotlinStdlib)
 
     implementation(project(Modules.main))
+    implementation(project(Modules.Library.Network.public))
+    implementation(project(Modules.Library.Network.impl))
 }
