@@ -10,6 +10,7 @@ internal class GeolocationResponse(
     val main: MainResponse,
     val wind: WindResponse,
     val name: String,
+    val sys: SysResponse,
 )
 
 @JsonClass(generateAdapter = true)
@@ -22,14 +23,14 @@ internal class WeatherResponse(
 
 @JsonClass(generateAdapter = true)
 internal class MainResponse(
-    val temp: Float,
+    val temp: Int,
     @Json(name = "feels_like")
-    val feelsLike: Float,
+    val feelsLike: Int,
     @Json(name = "temp_min")
-    val tempMin: Float,
+    val tempMin: Int,
     @Json(name = "temp_max")
-    val tempMax: Float,
-    val pressure: Float,
+    val tempMax: Int,
+    val pressure: Int,
     val humidity: Int,
 )
 
@@ -37,4 +38,10 @@ internal class MainResponse(
 internal class WindResponse(
     val speed: Float,
     val deg: Float,
+)
+
+@JsonClass(generateAdapter = true)
+internal data class SysResponse(
+    val sunrise: Long,
+    val sunset: Long,
 )

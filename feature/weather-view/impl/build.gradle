@@ -15,10 +15,12 @@ dependencies {
 
     implementation(project(Modules.Features.WeatherView.public))
     implementation(project(Modules.Library.Network.public))
+    implementation(project(Modules.Infrastructure.domainCore))
 
     Dependencies.Moshi.addLibs(project)
     implementation(Dependencies.retrofit)
     implementation(Dependencies.Koin.koin)
+    implementation(Dependencies.Coroutines.core)
 
     testImplementation(TestDependencies.jUnit)
     testImplementation(TestDependencies.mockk)
