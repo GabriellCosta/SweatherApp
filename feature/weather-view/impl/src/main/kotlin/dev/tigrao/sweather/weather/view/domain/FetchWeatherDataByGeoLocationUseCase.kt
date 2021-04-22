@@ -19,8 +19,8 @@ internal class FetchWeatherDataByGeoLocation(
     override suspend fun invoke(): Result<WeatherLocationModel, WeatherLocationErrorModel> {
         return callApi {
             api.getDataByGeographicCoordinates(
-                lat = 13.0,
-                lon = 32.0,
+                lat = -23.533773,
+                lon = -46.625290,
             )
         }.transformMap(
             success = {
