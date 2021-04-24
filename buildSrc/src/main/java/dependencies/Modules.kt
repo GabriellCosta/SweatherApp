@@ -21,4 +21,8 @@ object Modules {
     object Infrastructure {
         const val domainCore = ":infrastructure:domain-core"
     }
+
+    object DesignSystem {
+        const val tokens = ":design-system:tokens"
+    }
 }

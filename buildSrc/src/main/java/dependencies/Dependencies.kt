@@ -17,7 +17,7 @@ internal object Versions {
     const val roboletric = "4.3.1"
     const val timber = "4.7.1"
     const val livedata = "2.2.0"
-    const val constraintLayout = "1.1.3"
+    const val constraintLayout = "2.0.4"
     const val imageFetcher = "4.12.0"
 
     const val navigation = "2.3.0"
@@ -75,7 +75,7 @@ object Dependencies {
 
     const val appCompat = "androidx.appcompat:appcompat:${Versions.supportLibrary}"
     const val coreKTX = "androidx.core:core-ktx:1.3.1"
-    const val fragment = "androidx.fragment:fragment:1.2.5"
+    const val fragment = "androidx.fragment:fragment-ktx:1.3.3"
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
     const val materialDesign = "com.google.android.material:material:${Versions.material}"
     const val pullToRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="spacingXXXS" format="dimension"/>
+    <attr name="spacingXXS" format="dimension"/>
+    <attr name="spacingXS" format="dimension"/>
+    <attr name="spacingSM" format="dimension"/>
+    <attr name="spacingMD" format="dimension"/>
+    <attr name="spacingLG" format="dimension"/>
+    <attr name="spacingXL" format="dimension"/>
+    <attr name="spacingXXL" format="dimension"/>
+    <attr name="spacingXXXL" format="dimension"/>
+</resources>
