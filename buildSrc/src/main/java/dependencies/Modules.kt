@@ -24,5 +24,6 @@ object Modules {
 
     object DesignSystem {
         const val tokens = ":design-system:tokens"
+        const val core = ":design-system:core"
     }
 }

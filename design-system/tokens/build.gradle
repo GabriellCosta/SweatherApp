@@ -1,7 +1,3 @@
-import dependencies.Dependencies
-import dependencies.Modules
-import dependencies.TestDependencies
-
 plugins {
     id 'com.android.library'
     id 'kotlin-android'

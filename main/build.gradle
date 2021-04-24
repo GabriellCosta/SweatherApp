@@ -1,4 +1,5 @@
 import dependencies.Dependencies
+import dependencies.Modules
 
 plugins {
     id 'com.android.library'
@@ -14,4 +15,6 @@ dependencies {
     implementation(Dependencies.coreKTX)
     implementation(Dependencies.constraintLayout)
     implementation(Dependencies.appCompat)
+
+    implementation(project(Modules.DesignSystem.core))
 }
