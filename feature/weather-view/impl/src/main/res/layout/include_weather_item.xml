@@ -15,18 +15,18 @@
             tools:src="@drawable/ic_humidity" />
 
         <TextView
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="49%"
-            android:textAppearance="?attr/textAppearanceBody1" />
+            android:layout_marginTop="?attr/spacingXXS"
+            android:textAppearance="?attr/textAppearanceBody1"
+            tools:text="49%" />
 
         <TextView
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Humidity"
-            android:textAppearance="?attr/textAppearanceOverline" />
+            android:layout_marginTop="?attr/spacingXXS"
+            android:textAppearance="?attr/textAppearanceOverline"
+            tools:text="Humidity" />
 
     </LinearLayout>
 </layout>
