@@ -22,6 +22,12 @@ dependencies {
     implementation(Dependencies.Koin.koin)
     implementation(Dependencies.Coroutines.core)
 
+    implementation(Dependencies.fragment)
+    implementation(Dependencies.materialDesign)
+    implementation(Dependencies.coreKTX)
+    implementation(Dependencies.appCompat)
+    implementation(Dependencies.constraintLayout)
+
     testImplementation(TestDependencies.jUnit)
     testImplementation(TestDependencies.mockk)
 }
