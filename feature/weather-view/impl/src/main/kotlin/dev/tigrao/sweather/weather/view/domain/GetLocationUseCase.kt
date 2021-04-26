@@ -1,6 +1,7 @@
 package dev.tigrao.sweather.weather.view.domain
 
 import android.annotation.SuppressLint
+import android.location.Location
 import com.google.android.gms.location.*
 import dev.tigrao.sweather.domain.core.Result
 import dev.tigrao.sweather.weather.view.domain.model.LocationProviderErrorModel
@@ -28,9 +29,8 @@ internal class GetLocation(
                 if (task.isSuccessful && task.result != null) {
                     it.resume(
                         Result.Success(
-                            LocationProviderModel(
-                                lat = task.result.latitude,
-                                lon = task.result.longitude,
+                            convertLocation(
+                                task.result
                             )
                         )
                     )
@@ -60,9 +60,8 @@ internal class GetLocation(
                 result?.let { locationResult ->
                     it.resume(
                         Result.Success(
-                            LocationProviderModel(
-                                lat = locationResult.lastLocation.latitude,
-                                lon = locationResult.lastLocation.longitude,
+                            convertLocation(
+                                locationResult.lastLocation
                             )
                         )
                     )
@@ -82,6 +81,12 @@ internal class GetLocation(
             }
         }, null)
     }
+
+    private fun convertLocation(location: Location) =
+        LocationProviderModel(
+            lat = location.latitude,
+            lon = location.longitude,
+        )
 
     private fun createErrorLocationResult() = Result.Error(
         LocationProviderErrorModel.ErrorToGetLocation
