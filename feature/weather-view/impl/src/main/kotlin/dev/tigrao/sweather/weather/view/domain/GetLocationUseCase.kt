@@ -5,6 +5,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
+import dev.tigrao.sweather.domain.core.Result
 import dev.tigrao.sweather.weather.view.domain.model.LocationProviderErrorModel
 import dev.tigrao.sweather.weather.view.domain.model.LocationProviderModel
 import kotlin.coroutines.resume
@@ -14,14 +15,14 @@ private const val INTERVAL = 6000L
 private const val FASTER_INTERVAL = 5000L
 
 internal interface GetLocationUseCase {
-    suspend operator fun invoke(): dev.tigrao.sweather.domain.core.Result<LocationProviderModel, LocationProviderErrorModel>
+    suspend operator fun invoke(): Result<LocationProviderModel, LocationProviderErrorModel>
 }
 
 internal class GetLocation(
     private val fusedLocation: FusedLocationProviderClient,
 ) : GetLocationUseCase {
     @SuppressLint("MissingPermission")
-    override suspend fun invoke(): dev.tigrao.sweather.domain.core.Result<LocationProviderModel, LocationProviderErrorModel> {
+    override suspend fun invoke(): Result<LocationProviderModel, LocationProviderErrorModel> {
         return suspendCoroutine {
 
             val request = LocationRequest.create().apply {
@@ -37,7 +38,7 @@ internal class GetLocation(
 
                     result?.let { locationResult ->
                         it.resume(
-                            dev.tigrao.sweather.domain.core.Result.Success(
+                            Result.Success(
                                 LocationProviderModel(
                                     lat = locationResult.lastLocation.latitude,
                                     lon = locationResult.lastLocation.longitude,
@@ -52,7 +53,7 @@ internal class GetLocation(
         }
     }
 
-    private fun createErrorLocationResult() = dev.tigrao.sweather.domain.core.Result.Error(
+    private fun createErrorLocationResult() = Result.Error(
         LocationProviderErrorModel.ErrorToGetLocation
     )
 }
