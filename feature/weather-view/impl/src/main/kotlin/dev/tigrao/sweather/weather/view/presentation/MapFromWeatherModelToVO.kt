@@ -6,10 +6,10 @@ import dev.tigrao.sweather.weather.view.domain.model.WeatherLocationModel
 import dev.tigrao.sweather.weather.view.presentation.model.ConditionModelVO
 import dev.tigrao.sweather.weather.view.presentation.model.TemperatureModelVO
 import dev.tigrao.sweather.weather.view.presentation.model.WeatherViewVO
-import java.net.URL
 
 internal class MapFromWeatherModelToVO(
     private val symbolConverter: TemperatureSymbolConverter,
+    private val imageIconUrlFactory: ImageIconUrlFactory,
 ) {
 
     fun mapFrom(from: WeatherLocationModel): WeatherViewVO {
@@ -23,7 +23,9 @@ internal class MapFromWeatherModelToVO(
             minTemp = convertTemperature(symbol, from.temperature.min),
             maxTemp = convertTemperature(symbol, from.temperature.max),
             condition = ConditionModelVO(
-                icon = URL("http://openweathermap.org/img/wn/01d@2x.png"),
+                icon = imageIconUrlFactory.create(
+                    icon = from.weather.conditionIcon,
+                ),
                 name = from.weather.condition,
             )
         )

@@ -39,6 +39,7 @@ internal class FetchWeatherDataByGeoLocation(
                     // TODO: Move to string values
                     weather = WeatherInfoModel(
                         condition = it.weather.first().main,
+                        conditionIcon = it.weather.first().icon,
                         humidity = "${it.main.humidity}%",
                         pressure = "${it.main.pressure}hPa",
                         windSpeed = "${convertWindSpeed(it.wind.speed)}km/h",

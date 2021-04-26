@@ -15,7 +15,7 @@ internal class GeolocationResponse(
 
 @JsonClass(generateAdapter = true)
 internal class WeatherResponse(
-    val id: Long,
+    val id: Int,
     val main: String,
     val description: String,
     val icon: String,

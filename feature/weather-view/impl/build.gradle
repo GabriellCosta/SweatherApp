@@ -10,6 +10,12 @@ plugins {
 
 apply from: "$rootDir/quality/modules/android_module.gradle"
 
+android {
+    defaultConfig {
+        buildConfigField("String", "IMAGE_URL", "\"https://openweathermap.org/img/wn/{ID}@2x.png\"")
+    }
+}
+
 dependencies {
     implementation Dependencies.kotlinStdlib
 

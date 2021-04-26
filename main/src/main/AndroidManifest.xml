@@ -15,6 +15,6 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat" />
+            android:theme="@style/Theme.MyApp" />
     </application>
 </manifest>

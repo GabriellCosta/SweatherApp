@@ -2,6 +2,8 @@ package dev.tigrao.sweather.weather.view.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
@@ -41,9 +43,14 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
     private fun prepareObserver() {
         with(viewModel.viewState) {
             this.weatherView.observe(viewLifecycleOwner) {
-                Glide.with(viewBinding.imgCondition)
-                    .load(it.condition.icon.toString())
+                Glide
+                    .with(requireContext())
+                    .load(it.condition.icon)
                     .into(viewBinding.imgCondition)
+
+                viewBinding.imvBg.setImageDrawable(
+                    ContextCompat.getDrawable(requireContext(), it.background)
+                )
             }
         }
     }

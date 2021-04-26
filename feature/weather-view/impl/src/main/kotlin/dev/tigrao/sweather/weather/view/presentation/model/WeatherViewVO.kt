@@ -14,7 +14,7 @@ internal data class WeatherViewVO(
 )
 
 internal data class ConditionModelVO(
-    val icon: URL,
+    val icon: String,
     val name: String,
 )
 
