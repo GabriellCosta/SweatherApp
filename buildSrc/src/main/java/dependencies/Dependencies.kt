@@ -115,6 +115,12 @@ object Dependencies {
         const val viewBindingProperty =
             "com.kirich1409.viewbindingpropertydelegate:vbpd-noreflection:$VERSION"
     }
+
+    object Ciceroni {
+        private const val VERSION = "7.0"
+
+        const val library = "com.github.terrakok:cicerone:$VERSION"
+    }
 }
 
 object TestDependencies {

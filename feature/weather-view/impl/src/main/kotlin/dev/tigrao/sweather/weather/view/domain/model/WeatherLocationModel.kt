@@ -20,6 +20,7 @@ internal data class TemperatureModel(
 )
 
 internal data class WeatherInfoModel(
+    val condition: String,
     val humidity: String,
     val pressure: String,
     val windSpeed: String,

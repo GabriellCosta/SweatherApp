@@ -5,13 +5,15 @@ repositories {
 android {
     compileSdkVersion AndroidConfig.compileSdk
     defaultConfig {
-        applicationId AndroidConfig.applicationId
         minSdkVersion AndroidConfig.minSdk
         targetSdkVersion AndroidConfig.compileSdk
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
         testInstrumentationRunner AndroidConfig.instrumentationTestRunner
     }
+
+    viewBinding.enabled = true
+    dataBinding.enabled = true
 
     buildTypes {
         release {

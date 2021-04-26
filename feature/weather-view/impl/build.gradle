@@ -30,6 +30,11 @@ dependencies {
     implementation(Dependencies.appCompat)
     implementation(Dependencies.constraintLayout)
 
+    implementation(Dependencies.Kirich.viewBindingProperty)
+
+    implementation(Dependencies.Ciceroni.library)
+    implementation(Dependencies.imageFetcher)
+
     testImplementation(TestDependencies.jUnit)
     testImplementation(TestDependencies.mockk)
 }

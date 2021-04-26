@@ -23,13 +23,13 @@ internal class WeatherResponse(
 
 @JsonClass(generateAdapter = true)
 internal class MainResponse(
-    val temp: Int,
+    val temp: Double,
     @Json(name = "feels_like")
-    val feelsLike: Int,
+    val feelsLike: Double,
     @Json(name = "temp_min")
-    val tempMin: Int,
+    val tempMin: Double,
     @Json(name = "temp_max")
-    val tempMax: Int,
+    val tempMax: Double,
     val pressure: Int,
     val humidity: Int,
 )

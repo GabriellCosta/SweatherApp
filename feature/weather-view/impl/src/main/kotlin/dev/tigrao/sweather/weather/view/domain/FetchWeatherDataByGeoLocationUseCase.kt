@@ -31,13 +31,14 @@ internal class FetchWeatherDataByGeoLocation(
                         date = "",
                     ),
                     temperature = TemperatureModel(
-                        temperature = it.main.temp.toString(),
-                        min = it.main.tempMin.toString(),
-                        max = it.main.tempMax.toString(),
+                        temperature = it.main.temp.toInt().toString(),
+                        min = it.main.tempMin.toInt().toString(),
+                        max = it.main.tempMax.toInt().toString(),
                         unitType = UnitType.STANDARD,
                     ),
                     // TODO: Move to string values
                     weather = WeatherInfoModel(
+                        condition = it.weather.first().main,
                         humidity = "${it.main.humidity}%",
                         pressure = "${it.main.pressure}hPa",
                         windSpeed = "${convertWindSpeed(it.wind.speed)}km/h",

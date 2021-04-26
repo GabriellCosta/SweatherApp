@@ -15,6 +15,7 @@ internal class CustomKoinApplication {
         modules(
             networkModule,
             networkImplModule,
+            ciceroniModule,
         )
 
         modules(getWeatherViewModules())

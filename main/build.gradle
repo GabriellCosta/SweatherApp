@@ -17,4 +17,10 @@ dependencies {
     implementation(Dependencies.appCompat)
 
     implementation(project(Modules.DesignSystem.core))
+    implementation(project(Modules.DesignSystem.tokens))
+
+    implementation(Dependencies.Ciceroni.library)
+    implementation(Dependencies.Koin.koin)
+
+    implementation(project(Modules.Features.WeatherView.public))
 }

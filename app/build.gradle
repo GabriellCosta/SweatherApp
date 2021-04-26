@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/*.kotlin_module'
+    }
 }
 
 dependencies {
@@ -33,4 +37,6 @@ dependencies {
     implementation(project(Modules.Features.WeatherView.impl))
 
     implementation(Dependencies.Koin.koin)
+
+    implementation(Dependencies.Ciceroni.library)
 }
