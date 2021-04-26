@@ -20,7 +20,7 @@ internal class GetLocation(
     override suspend fun invoke(): dev.tigrao.sweather.domain.core.Result<LocationProviderModel, LocationProviderErrorModel> {
         return suspendCoroutine {
             fusedLocation.lastLocation.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
+                if (task.isSuccessful && task.result != null) {
                     val result = task.result.run {
                         dev.tigrao.sweather.domain.core.Result.Success(
                             LocationProviderModel(
