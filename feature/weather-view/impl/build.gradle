@@ -34,6 +34,7 @@ dependencies {
 
     implementation(Dependencies.Ciceroni.library)
     implementation(Dependencies.imageFetcher)
+    implementation(Dependencies.Dexter.library)
 
     testImplementation(TestDependencies.jUnit)
     testImplementation(TestDependencies.mockk)

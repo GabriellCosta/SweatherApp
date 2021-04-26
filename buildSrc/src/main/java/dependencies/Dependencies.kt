@@ -121,6 +121,12 @@ object Dependencies {
 
         const val library = "com.github.terrakok:cicerone:$VERSION"
     }
+
+    object Dexter {
+        private const val VERSION = "6.2.2"
+
+        const val library = "com.karumi:dexter:$VERSION"
+    }
 }
 
 object TestDependencies {

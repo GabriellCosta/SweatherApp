@@ -5,11 +5,21 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.BasePermissionListener
+import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener
+import com.karumi.dexter.listener.single.PermissionListener
 import dev.tigrao.sweather.weather.view.R
 import dev.tigrao.sweather.weather.view.databinding.FragmentWeatherViewBinding
 import dev.tigrao.sweather.weather.view.presentation.WeatherViewViewModel
+import dev.tigrao.sweather.weather.view.presentation.model.WeatherViewAction
 import dev.tigrao.sweather.weather.view.presentation.model.WeatherViewState
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.jar.Manifest
 
 internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
 
@@ -25,6 +35,7 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
         }
 
         prepareObserver()
+        locationPermission()
     }
 
     private fun prepareObserver() {
@@ -35,5 +46,33 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
                     .into(viewBinding.imgCondition)
             }
         }
+    }
+
+    private fun locationPermission() {
+        Dexter.withContext(requireContext())
+            .withPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            .withListener(object : PermissionListener {
+                override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                    viewModel.dispatch(WeatherViewAction.PermissionGranted)
+                }
+
+                override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
+                    viewModel.dispatch(WeatherViewAction.PermissionNotGranted)
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: PermissionRequest?,
+                    p1: PermissionToken?
+                ) {
+                    DialogOnDeniedPermissionListener.Builder
+                        .withContext(context)
+                        .withTitle("Camera permission")
+                        .withMessage("Camera permission is needed to take pictures of your cat")
+                        .withButtonText(android.R.string.ok)
+                        .build()
+                        .onPermissionRationaleShouldBeShown(p0, p1)
+                }
+
+            }).check()
     }
 }
