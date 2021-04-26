@@ -50,7 +50,7 @@ class FetchWeatherDataByGeoLocationTest {
         val result = subject()
 
         val expected = WeatherLocationModel(
-            location = LocationModel(
+            location = LocationProviderModel(
                 city = "",
                 country = "",
                 date = "",

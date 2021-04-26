@@ -42,6 +42,8 @@ dependencies {
     implementation(Dependencies.imageFetcher)
     implementation(Dependencies.Dexter.library)
 
+    implementation(Dependencies.GooglePlay.location)
+
     testImplementation(TestDependencies.jUnit)
     testImplementation(TestDependencies.mockk)
 }

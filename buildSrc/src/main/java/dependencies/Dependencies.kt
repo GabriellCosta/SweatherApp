@@ -127,6 +127,12 @@ object Dependencies {
 
         const val library = "com.karumi:dexter:$VERSION"
     }
+
+    object GooglePlay {
+        private const val VERSION = "18.0.0"
+
+        const val location = "com.google.android.gms:play-services-location:$VERSION"
+    }
 }
 
 object TestDependencies {
