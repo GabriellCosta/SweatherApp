@@ -1,6 +1,5 @@
 package dev.tigrao.sweather.weather.view.domain
 
-import android.location.Location
 import dev.tigrao.sweather.domain.core.Result
 import dev.tigrao.sweather.domain.core.api.callApi
 import dev.tigrao.sweather.weather.view.data.WeatherViewApi
@@ -10,7 +9,6 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.Locale.getDefault
 
 internal interface FetchWeatherDataByGeoLocationUseCase {
     suspend operator fun invoke(): Result<WeatherLocationModel, WeatherLocationErrorModel>
@@ -35,42 +33,49 @@ internal class FetchWeatherDataByGeoLocation(
                 lat = data.lat,
                 lon = data.lon,
             )
-        }.transformMap(
+        }.map(
             success = {
-                convertLocation(it)
+                val result = convertLocation(it)
+
+                if (result != null)
+                    Result.Success(result)
+                else
+                    Result.Error(WeatherLocationErrorModel.ApiError)
             },
             error = {
-                WeatherLocationErrorModel.GenericError
+                Result.Error(WeatherLocationErrorModel.GenericError)
             }
         )
 
-    private fun convertLocation(it: GeolocationResponse): WeatherLocationModel {
+    private fun convertLocation(it: GeolocationResponse): WeatherLocationModel? {
 
         val locale = Locale("", it.sys.country)
 
-        return WeatherLocationModel(
-            location = LocationModel(
-                city = it.name,
-                country = locale.country,
-                date = "",
-            ),
-            temperature = TemperatureModel(
-                temperature = it.main.temp.toInt().toString(),
-                min = it.main.tempMin.toInt().toString(),
-                max = it.main.tempMax.toInt().toString(),
-                unitType = UnitType.METRIC,
-            ),
-            // TODO: Move to string values
-            weather = WeatherInfoModel(
-                condition = it.weather.first().main,
-                conditionIcon = it.weather.first().icon,
-                humidity = "${it.main.humidity}%",
-                pressure = "${it.main.pressure}hPa",
-                windSpeed = "${convertWindSpeed(it.wind.speed)}km/h",
-                sunrise = dateConverter(it.sys.sunrise),
-                sunset = dateConverter(it.sys.sunset),
+        return it.weather.firstOrNull()?.let { weather ->
+            WeatherLocationModel(
+                location = LocationModel(
+                    city = it.name,
+                    country = locale.displayCountry,
+                    date = "",
+                ),
+                temperature = TemperatureModel(
+                    temperature = it.main.temp.toInt().toString(),
+                    min = it.main.tempMin.toInt().toString(),
+                    max = it.main.tempMax.toInt().toString(),
+                    unitType = UnitType.METRIC,
+                ),
+                // TODO: Move to string values
+                weather = WeatherInfoModel(
+                    condition = weather.main,
+                    conditionIcon = weather.icon,
+                    humidity = "${it.main.humidity}%",
+                    pressure = "${it.main.pressure}hPa",
+                    windSpeed = "${convertWindSpeed(it.wind.speed)}km/h",
+                    sunrise = dateConverter(it.sys.sunrise),
+                    sunset = dateConverter(it.sys.sunset),
+                )
             )
-        )
+        }
     }
 
     private fun convertWindSpeed(speed: Float): BigDecimal {
