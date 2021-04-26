@@ -38,6 +38,13 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
 
         prepareObserver()
         locationPermission()
+        prepareLayout()
+    }
+
+    private fun prepareLayout() {
+        viewBinding.btnTryAgain.setOnClickListener {
+            viewModel.dispatch(WeatherViewAction.TryAgain)
+        }
     }
 
     private fun prepareObserver() {
