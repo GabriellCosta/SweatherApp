@@ -13,6 +13,7 @@ internal val weatherViewPresentationModule = module {
         MapFromWeatherModelToVO(
             get(),
             get(),
+            get(),
         )
     }
 
