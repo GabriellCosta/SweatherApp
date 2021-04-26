@@ -1,5 +1,6 @@
 package dev.tigrao.sweather.weather.view.di
 
+import dev.tigrao.sweather.weather.view.BuildConfig
 import dev.tigrao.sweather.weather.view.domain.TemperatureSymbolConverter
 import dev.tigrao.sweather.weather.view.presentation.ImageIconUrlFactory
 import dev.tigrao.sweather.weather.view.presentation.MapFromWeatherModelToVO
@@ -20,7 +21,9 @@ internal val weatherViewPresentationModule = module {
     }
 
     factory {
-        ImageIconUrlFactory()
+        ImageIconUrlFactory(
+            BuildConfig.IMAGE_URL,
+        )
     }
 
     viewModel {
