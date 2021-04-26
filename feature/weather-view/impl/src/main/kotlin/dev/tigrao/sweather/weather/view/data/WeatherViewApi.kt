@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 internal interface WeatherViewApi {
 
-    @GET("weather")
+    @GET("weather?units=metric")
     suspend fun getDataByGeographicCoordinates(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double

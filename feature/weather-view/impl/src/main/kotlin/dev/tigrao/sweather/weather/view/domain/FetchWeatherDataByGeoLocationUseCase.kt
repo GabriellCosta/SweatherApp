@@ -58,7 +58,7 @@ internal class FetchWeatherDataByGeoLocation(
                 temperature = it.main.temp.toInt().toString(),
                 min = it.main.tempMin.toInt().toString(),
                 max = it.main.tempMax.toInt().toString(),
-                unitType = UnitType.STANDARD,
+                unitType = UnitType.METRIC,
             ),
             // TODO: Move to string values
             weather = WeatherInfoModel(

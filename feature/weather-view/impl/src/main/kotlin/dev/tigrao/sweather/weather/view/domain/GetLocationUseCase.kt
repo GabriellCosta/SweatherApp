@@ -1,13 +1,11 @@
 package dev.tigrao.sweather.weather.view.domain
 
 import android.annotation.SuppressLint
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.*
 import dev.tigrao.sweather.domain.core.Result
 import dev.tigrao.sweather.weather.view.domain.model.LocationProviderErrorModel
 import dev.tigrao.sweather.weather.view.domain.model.LocationProviderModel
+import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -21,36 +19,68 @@ internal interface GetLocationUseCase {
 internal class GetLocation(
     private val fusedLocation: FusedLocationProviderClient,
 ) : GetLocationUseCase {
+
     @SuppressLint("MissingPermission")
     override suspend fun invoke(): Result<LocationProviderModel, LocationProviderErrorModel> {
         return suspendCoroutine {
 
-            val request = LocationRequest.create().apply {
-                interval = INTERVAL
-                fastestInterval = FASTER_INTERVAL
-                priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
-
-            }
-
-            fusedLocation.requestLocationUpdates(request, object : LocationCallback() {
-                override fun onLocationResult(result: LocationResult?) {
-                    super.onLocationResult(result)
-
-                    result?.let { locationResult ->
-                        it.resume(
-                            Result.Success(
-                                LocationProviderModel(
-                                    lat = locationResult.lastLocation.latitude,
-                                    lon = locationResult.lastLocation.longitude,
-                                )
+            fusedLocation.lastLocation.addOnCompleteListener { task ->
+                if (task.isSuccessful && task.result != null) {
+                    it.resume(
+                        Result.Success(
+                            LocationProviderModel(
+                                lat = task.result.latitude,
+                                lon = task.result.longitude,
                             )
                         )
-                    } ?: run {
-                        it.resume(createErrorLocationResult())
-                    }
+                    )
+                } else {
+                    requestLocationUpdate(it)
                 }
-            }, null)
+            }
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun requestLocationUpdate(
+        it: Continuation<Result<LocationProviderModel, LocationProviderErrorModel>>
+    ) {
+        val request = LocationRequest.create().apply {
+            interval = INTERVAL
+            fastestInterval = FASTER_INTERVAL
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        }
+
+        fusedLocation.requestLocationUpdates(request, object : LocationCallback() {
+            override fun onLocationResult(result: LocationResult?) {
+                super.onLocationResult(result)
+
+                fusedLocation.removeLocationUpdates(this)
+                result?.let { locationResult ->
+                    it.resume(
+                        Result.Success(
+                            LocationProviderModel(
+                                lat = locationResult.lastLocation.latitude,
+                                lon = locationResult.lastLocation.longitude,
+                            )
+                        )
+                    )
+                } ?: run {
+                    it.resume(createErrorLocationResult())
+                }
+            }
+
+            override fun onLocationAvailability(availability: LocationAvailability?) {
+                super.onLocationAvailability(availability)
+
+                if (availability != null && !availability.isLocationAvailable) {
+                    it.resume(createErrorLocationResult())
+                    fusedLocation.removeLocationUpdates(this)
+                }
+
+            }
+        }, null)
     }
 
     private fun createErrorLocationResult() = Result.Error(

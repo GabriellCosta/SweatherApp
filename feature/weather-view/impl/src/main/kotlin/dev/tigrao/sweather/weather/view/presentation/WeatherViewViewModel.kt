@@ -39,6 +39,10 @@ internal class WeatherViewViewModel(
                 View.GONE
             )
 
+            viewState.showError.postValue(
+                View.GONE
+            )
+
             fetchWeatherDataByGeoLocationUseCase()
                 .onSuccess {
                     viewState.showLoading.postValue(

@@ -64,7 +64,7 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
 
     private fun locationPermission() {
         Dexter.withContext(requireContext())
-            .withPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            .withPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
             .withListener(object : PermissionListener {
                 override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
                     viewModel.dispatch(WeatherViewAction.PermissionGranted)
