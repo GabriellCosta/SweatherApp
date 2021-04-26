@@ -6,6 +6,8 @@ import dev.tigrao.sweather.weather.view.domain.model.WeatherLocationModel
 import dev.tigrao.sweather.weather.view.presentation.model.ConditionModelVO
 import dev.tigrao.sweather.weather.view.presentation.model.TemperatureModelVO
 import dev.tigrao.sweather.weather.view.presentation.model.WeatherViewVO
+import java.text.SimpleDateFormat
+import java.util.*
 
 internal class MapFromWeatherModelToVO(
     private val symbolConverter: TemperatureSymbolConverter,
@@ -13,12 +15,13 @@ internal class MapFromWeatherModelToVO(
 ) {
 
     fun mapFrom(from: WeatherLocationModel): WeatherViewVO {
+        val time = getCurrentTime()
         val symbol = symbolConverter.mapFrom(from.temperature.unitType)
 
         return WeatherViewVO(
             background = R.drawable.bg_weather_view_day,
-            date = "Sunday, 19 May 2019  |  4:30PM",
-            city = "Muambai, India",
+            date = getDatetime(time),
+            city = from.location.city,
             currentTemp = convertTemperature(symbol, from.temperature.temperature),
             minTemp = convertTemperature(symbol, from.temperature.min),
             maxTemp = convertTemperature(symbol, from.temperature.max),
@@ -30,6 +33,14 @@ internal class MapFromWeatherModelToVO(
             )
         )
     }
+
+    private fun getDatetime(calendar: Calendar): String {
+        val format = SimpleDateFormat("E, dd MMM yyyy | HH:mm", Locale.getDefault())
+
+        return format.format(calendar.time)
+    }
+
+    private fun getCurrentTime() = Calendar.getInstance()
 
     private fun convertTemperature(unit: String, temp: String) = TemperatureModelVO(
         value = temp,

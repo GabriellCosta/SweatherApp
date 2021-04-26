@@ -1,5 +1,6 @@
 package dev.tigrao.sweather.weather.view.domain
 
+import android.location.Location
 import dev.tigrao.sweather.domain.core.Result
 import dev.tigrao.sweather.domain.core.api.callApi
 import dev.tigrao.sweather.weather.view.data.WeatherViewApi
@@ -9,6 +10,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Locale.getDefault
 
 internal interface FetchWeatherDataByGeoLocationUseCase {
     suspend operator fun invoke(): Result<WeatherLocationModel, WeatherLocationErrorModel>
@@ -42,11 +44,14 @@ internal class FetchWeatherDataByGeoLocation(
             }
         )
 
-    private fun convertLocation(it: GeolocationResponse) =
-        WeatherLocationModel(
+    private fun convertLocation(it: GeolocationResponse): WeatherLocationModel {
+
+        val locale = Locale("", it.sys.country)
+
+        return WeatherLocationModel(
             location = LocationModel(
-                city = "",
-                country = "",
+                city = it.name,
+                country = locale.country,
                 date = "",
             ),
             temperature = TemperatureModel(
@@ -66,6 +71,7 @@ internal class FetchWeatherDataByGeoLocation(
                 sunset = dateConverter(it.sys.sunset),
             )
         )
+    }
 
     private fun convertWindSpeed(speed: Float): BigDecimal {
         return BigDecimal.valueOf(speed.toDouble())
