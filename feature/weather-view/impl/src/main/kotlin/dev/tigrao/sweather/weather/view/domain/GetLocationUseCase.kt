@@ -1,13 +1,17 @@
 package dev.tigrao.sweather.weather.view.domain
 
 import android.annotation.SuppressLint
-import android.content.Context
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import dev.tigrao.sweather.weather.view.domain.model.LocationProviderErrorModel
 import dev.tigrao.sweather.weather.view.domain.model.LocationProviderModel
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+
+private const val INTERVAL = 6000L
+private const val FASTER_INTERVAL = 5000L
 
 internal interface GetLocationUseCase {
     suspend operator fun invoke(): dev.tigrao.sweather.domain.core.Result<LocationProviderModel, LocationProviderErrorModel>
@@ -19,25 +23,36 @@ internal class GetLocation(
     @SuppressLint("MissingPermission")
     override suspend fun invoke(): dev.tigrao.sweather.domain.core.Result<LocationProviderModel, LocationProviderErrorModel> {
         return suspendCoroutine {
-            fusedLocation.lastLocation.addOnCompleteListener { task ->
-                if (task.isSuccessful && task.result != null) {
-                    val result = task.result.run {
-                        dev.tigrao.sweather.domain.core.Result.Success(
-                            LocationProviderModel(
-                                lat = latitude,
-                                lon = longitude,
+
+            val request = LocationRequest.create().apply {
+                interval = INTERVAL
+                fastestInterval = FASTER_INTERVAL
+                priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
+
+            }
+
+            fusedLocation.requestLocationUpdates(request, object : LocationCallback() {
+                override fun onLocationResult(result: LocationResult?) {
+                    super.onLocationResult(result)
+
+                    result?.let { locationResult ->
+                        it.resume(
+                            dev.tigrao.sweather.domain.core.Result.Success(
+                                LocationProviderModel(
+                                    lat = locationResult.lastLocation.latitude,
+                                    lon = locationResult.lastLocation.longitude,
+                                )
                             )
                         )
+                    } ?: run {
+                        it.resume(createErrorLocationResult())
                     }
-                    it.resume(result)
-                } else {
-                    val result = dev.tigrao.sweather.domain.core.Result.Error(
-                        LocationProviderErrorModel.ErrorToGetLocation
-                    )
-
-                    it.resume(result)
                 }
-            }
+            }, null)
         }
     }
+
+    private fun createErrorLocationResult() = dev.tigrao.sweather.domain.core.Result.Error(
+        LocationProviderErrorModel.ErrorToGetLocation
+    )
 }
