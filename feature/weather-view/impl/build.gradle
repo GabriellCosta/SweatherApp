@@ -46,4 +46,5 @@ dependencies {
 
     testImplementation(TestDependencies.jUnit)
     testImplementation(TestDependencies.mockk)
+    testImplementation(TestDependencies.roboletric)
 }

@@ -14,7 +14,7 @@ internal object Versions {
     const val androidJUnit = "1.2.0"
     const val espressoCore = "3.3.0"
     const val espressoRules = "1.3.0"
-    const val roboletric = "4.3.1"
+    const val roboletric = "4.5.1"
     const val timber = "4.7.1"
     const val livedata = "2.2.0"
     const val constraintLayout = "2.0.4"
