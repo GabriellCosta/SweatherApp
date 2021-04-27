@@ -91,7 +91,7 @@ internal class FetchWeatherDataByGeoLocation(
         val dateFormat = SimpleDateFormat(HOUR_PATTERN, Locale.getDefault())
 
         return Calendar.getInstance().run {
-            timeInMillis = milli
+            timeInMillis = milli * 1000
             dateFormat.format(this.time)
         }
     }

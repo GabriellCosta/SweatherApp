@@ -51,7 +51,7 @@ class FetchWeatherDataByGeoLocationTest {
             ),
             name = "Shuzenji",
             sys = SysResponse(
-                sunrise = 1619083372,
+                sunrise = 1619515532,
                 sunset = 1619124401,
                 country = "JP"
             )
@@ -81,8 +81,8 @@ class FetchWeatherDataByGeoLocationTest {
                 humidity = "93%",
                 pressure = "1016hPa",
                 windSpeed = "11km/h",
-                sunrise = "02:44 PM",
-                sunset = "02:45 PM",
+                sunrise = "06:25 AM",
+                sunset = "05:46 PM",
             )
         )
 
