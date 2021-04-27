@@ -18,12 +18,14 @@ class MapFromWeatherModelToVOTest {
     private val imageIconUrlFactory = mockk<ImageIconUrlFactory>()
     private val getDayInformationUseCase = mockk<GetDayInformationUseCase>()
     private val getBackgroundUseCase = mockk<GetBackgroundUseCase>()
+    private val weatherListConditionsFactory = mockk<WeatherListConditionsFactory>()
 
     private val subject = MapFromWeatherModelToVO(
         symbolConverter,
         imageIconUrlFactory,
         getDayInformationUseCase,
         getBackgroundUseCase,
+        weatherListConditionsFactory
     )
 
     @Test
@@ -92,7 +94,8 @@ class MapFromWeatherModelToVOTest {
                     icon = icon,
                 ),
                 name = condition,
-            )
+            ),
+            weatherItemList = emptyList()
         )
 
         assertEquals(expected, result)
@@ -108,5 +111,6 @@ class MapFromWeatherModelToVOTest {
         every { imageIconUrlFactory.create(any()) } returns icon
         every { getDayInformationUseCase() } returns dayInformation
         every { getBackgroundUseCase(any()) } returns background
+        every { weatherListConditionsFactory.create(any()) } returns emptyList()
     }
 }
