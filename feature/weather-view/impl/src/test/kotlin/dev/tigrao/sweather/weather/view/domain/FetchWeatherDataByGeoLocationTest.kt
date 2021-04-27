@@ -68,7 +68,6 @@ class FetchWeatherDataByGeoLocationTest {
             location = LocationModel(
                 city = "Shuzenji",
                 country = "Japão",
-                date = "",
             ),
             temperature = TemperatureModel(
                 temperature = "281",

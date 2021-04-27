@@ -9,7 +9,6 @@ internal data class WeatherLocationModel(
 internal data class LocationModel(
     val city: String,
     val country: String,
-    val date: String,
 )
 
 internal data class TemperatureModel(

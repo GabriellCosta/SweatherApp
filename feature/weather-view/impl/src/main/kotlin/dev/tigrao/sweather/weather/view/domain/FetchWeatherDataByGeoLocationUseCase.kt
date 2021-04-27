@@ -56,7 +56,6 @@ internal class FetchWeatherDataByGeoLocation(
                 location = LocationModel(
                     city = it.name,
                     country = locale.displayCountry,
-                    date = "",
                 ),
                 temperature = TemperatureModel(
                     temperature = it.main.temp.toInt().toString(),

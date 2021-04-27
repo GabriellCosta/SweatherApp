@@ -18,7 +18,7 @@ internal data class ConditionModelVO(
     val name: String,
 )
 
-internal class TemperatureModelVO(
+internal data class TemperatureModelVO(
     val value: String,
     val symbol: String,
     val complete: String,
