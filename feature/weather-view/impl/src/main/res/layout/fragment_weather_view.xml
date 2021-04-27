@@ -17,7 +17,7 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewState.showLoading}"
+            app:isVisible="@{viewState.showLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,23 +26,24 @@
         <!-- ERROR VIEW -->
 
         <TextView
-            android:visibility="@{viewState.showError}"
             android:id="@+id/txt_error"
-            android:textAppearance="?attr/textAppearanceHeadline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="?attr/spacingXS"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:isVisible="@{viewState.showError.visible}"
             app:layout_constraintBottom_toTopOf="@+id/btn_try_again"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="?attr/spacingXS"
-            android:text="@string/generic_error_message" />
+            app:nativeString="@{viewState.showError.nativeStringType}" />
 
         <com.google.android.material.button.MaterialButton
-            android:visibility="@{viewState.showError}"
             android:id="@+id/btn_try_again"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_error_try_again"
+            app:isVisible="@{viewState.showError.visible}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,8 +55,8 @@
             android:id="@+id/group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewState.showLayout}"
-            app:constraint_referenced_ids="bottom_sheet, guideline_city, img_condition, txt_city, txt_date, txt_max_temp, txt_min_temp, txt_temp_symbol, imv_bg" />
+            app:constraint_referenced_ids="bottom_sheet, guideline_city, img_condition, txt_city, txt_date, txt_max_temp, txt_min_temp, txt_temp_symbol, imv_bg"
+            app:isVisible="@{viewState.showLayout}" />
 
         <ImageView
             android:id="@+id/imv_bg"

@@ -1,13 +1,15 @@
 package dev.tigrao.sweather.weather.view.presentation.model
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
+import dev.tigrao.sweather.infra.common.livedata.SingleEventLiveData
 
 internal class WeatherViewState {
 
     val weatherView = MutableLiveData<WeatherViewVO>()
 
-    val showLoading = MutableLiveData<Int>()
-    val showError = MutableLiveData(View.GONE)
-    val showLayout = MutableLiveData<Int>()
+    val showLoading = MutableLiveData<Boolean>()
+    val showError = MutableLiveData<ErrorMessageVO>()
+    val showLayout = MutableLiveData<Boolean>()
+
+    val checkPermission = SingleEventLiveData<Unit>()
 }

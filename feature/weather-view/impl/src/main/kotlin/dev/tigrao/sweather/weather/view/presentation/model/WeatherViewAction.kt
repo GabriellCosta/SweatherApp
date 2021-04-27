@@ -4,5 +4,6 @@ internal sealed class WeatherViewAction {
 
     object PermissionGranted : WeatherViewAction()
     object PermissionNotGranted : WeatherViewAction()
+    object CheckPermission: WeatherViewAction()
     object TryAgain : WeatherViewAction()
 }

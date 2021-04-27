@@ -3,7 +3,6 @@ package dev.tigrao.sweather.weather.view.view
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
@@ -12,16 +11,13 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.BasePermissionListener
 import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener
 import com.karumi.dexter.listener.single.PermissionListener
 import dev.tigrao.sweather.weather.view.R
 import dev.tigrao.sweather.weather.view.databinding.FragmentWeatherViewBinding
 import dev.tigrao.sweather.weather.view.presentation.WeatherViewViewModel
 import dev.tigrao.sweather.weather.view.presentation.model.WeatherViewAction
-import dev.tigrao.sweather.weather.view.presentation.model.WeatherViewState
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.jar.Manifest
 
 internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
 
@@ -38,13 +34,6 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
 
         prepareObserver()
         locationPermission()
-        prepareLayout()
-    }
-
-    private fun prepareLayout() {
-        viewBinding.btnTryAgain.setOnClickListener {
-            viewModel.dispatch(WeatherViewAction.TryAgain)
-        }
     }
 
     private fun prepareObserver() {
@@ -58,6 +47,16 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
                 viewBinding.imvBg.setImageDrawable(
                     ContextCompat.getDrawable(requireContext(), it.background)
                 )
+            }
+
+            this.showError.observe(viewLifecycleOwner) { errorVO ->
+                viewBinding.btnTryAgain.setOnClickListener {
+                    errorVO.action?.invoke()
+                }
+            }
+
+            this.checkPermission.observe(viewLifecycleOwner) {
+                locationPermission()
             }
         }
     }

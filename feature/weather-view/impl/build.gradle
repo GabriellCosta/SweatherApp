@@ -22,6 +22,8 @@ dependencies {
     implementation(project(Modules.Features.WeatherView.public))
     implementation(project(Modules.Library.Network.public))
     implementation(project(Modules.Infrastructure.domainCore))
+    implementation(project(Modules.Infrastructure.binds))
+    implementation(project(Modules.Infrastructure.common))
     implementation(project(Modules.DesignSystem.tokens))
     implementation(project(Modules.DesignSystem.core))
 
