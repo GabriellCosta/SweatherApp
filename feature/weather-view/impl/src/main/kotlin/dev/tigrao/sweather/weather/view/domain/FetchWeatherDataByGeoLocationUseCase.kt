@@ -14,6 +14,8 @@ internal interface FetchWeatherDataByGeoLocationUseCase {
     suspend operator fun invoke(): Result<WeatherLocationModel, WeatherLocationErrorModel>
 }
 
+private const val HOUR_PATTERN = "hh:mm a"
+
 internal class FetchWeatherDataByGeoLocation(
     private val api: WeatherViewApi,
     private val getLocationUseCase: GetLocationUseCase,
@@ -86,7 +88,7 @@ internal class FetchWeatherDataByGeoLocation(
     }
 
     private fun dateConverter(milli: Long): String {
-        val dateFormat = SimpleDateFormat("hh:mm a")
+        val dateFormat = SimpleDateFormat(HOUR_PATTERN, Locale.getDefault())
 
         return Calendar.getInstance().run {
             timeInMillis = milli
