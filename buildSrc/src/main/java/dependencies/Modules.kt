@@ -20,6 +20,7 @@ object Modules {
 
     object Infrastructure {
         const val domainCore = ":infrastructure:domain-core"
+        const val binds = ":infrastructure:binds"
     }
 
     object DesignSystem {
