@@ -24,4 +24,8 @@ internal val weatherViewDomainModule = module {
             get()
         )
     }
+
+    single<GetBackgroundUseCase> {
+        GetBackground()
+    }
 }

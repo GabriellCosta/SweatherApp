@@ -14,6 +14,7 @@ internal val weatherViewPresentationModule = module {
             get(),
             get(),
             get(),
+            get(),
         )
     }
 

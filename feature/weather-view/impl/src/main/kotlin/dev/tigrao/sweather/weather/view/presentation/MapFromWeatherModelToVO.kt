@@ -1,19 +1,18 @@
 package dev.tigrao.sweather.weather.view.presentation
 
-import dev.tigrao.sweather.weather.view.R
+import dev.tigrao.sweather.weather.view.domain.GetBackgroundUseCase
 import dev.tigrao.sweather.weather.view.domain.GetDayInformationUseCase
 import dev.tigrao.sweather.weather.view.domain.TemperatureSymbolConverter
 import dev.tigrao.sweather.weather.view.domain.model.WeatherLocationModel
 import dev.tigrao.sweather.weather.view.presentation.model.ConditionModelVO
 import dev.tigrao.sweather.weather.view.presentation.model.TemperatureModelVO
 import dev.tigrao.sweather.weather.view.presentation.model.WeatherViewVO
-import java.text.SimpleDateFormat
-import java.util.*
 
 internal class MapFromWeatherModelToVO(
     private val symbolConverter: TemperatureSymbolConverter,
     private val imageIconUrlFactory: ImageIconUrlFactory,
     private val getDayInformationUseCase: GetDayInformationUseCase,
+    private val getBackgroundUseCase: GetBackgroundUseCase,
 ) {
 
     fun mapFrom(from: WeatherLocationModel): WeatherViewVO {
@@ -21,7 +20,7 @@ internal class MapFromWeatherModelToVO(
         val dayInformation = getDayInformationUseCase()
 
         return WeatherViewVO(
-            background = getBackground(dayInformation.isDay),
+            background = getBackgroundUseCase(dayInformation.isDay),
             date = dayInformation.date,
             city = from.location.city,
             currentTemp = convertTemperature(symbol, from.temperature.temperature),
@@ -35,9 +34,6 @@ internal class MapFromWeatherModelToVO(
             )
         )
     }
-
-    private fun getBackground(isDay: Boolean) =
-        if (isDay) R.drawable.bg_weather_view_day else R.drawable.bg_weather_view_night
 
     private fun convertTemperature(unit: String, temp: String) = TemperatureModelVO(
         value = temp,
