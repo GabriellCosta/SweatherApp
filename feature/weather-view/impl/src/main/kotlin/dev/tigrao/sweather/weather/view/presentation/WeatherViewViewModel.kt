@@ -32,37 +32,20 @@ internal class WeatherViewViewModel(
 
     private fun fetch() {
         viewModelScope.launch {
-            viewState.showLoading.postValue(
-                View.VISIBLE
-            )
-            viewState.showLayout.postValue(
-                View.GONE
-            )
-
-            viewState.showError.postValue(
-                View.GONE
-            )
+            viewState.showLoading.postValue(View.VISIBLE)
+            viewState.showLayout.postValue(View.GONE)
+            viewState.showError.postValue(View.GONE)
 
             fetchWeatherDataByGeoLocationUseCase()
                 .onSuccess {
-                    viewState.showLoading.postValue(
-                        View.GONE
-                    )
-                    viewState.showLayout.postValue(
-                        View.VISIBLE
-                    )
+                    viewState.showLoading.postValue(View.GONE)
+                    viewState.showLayout.postValue(View.VISIBLE)
 
-                    viewState.weatherView.postValue(
-                        mapFromWeatherModelToVO.mapFrom(it)
-                    )
+                    viewState.weatherView.postValue(mapFromWeatherModelToVO.mapFrom(it))
                 }
                 .onError {
-                    viewState.showLoading.postValue(
-                        View.GONE
-                    )
-                    viewState.showError.postValue(
-                        View.VISIBLE
-                    )
+                    viewState.showLoading.postValue(View.GONE)
+                    viewState.showError.postValue(View.VISIBLE)
                 }
         }
     }
