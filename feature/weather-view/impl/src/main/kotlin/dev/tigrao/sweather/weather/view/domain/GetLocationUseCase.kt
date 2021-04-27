@@ -45,41 +45,39 @@ internal class GetLocation(
     private fun requestLocationUpdate(
         it: Continuation<Result<LocationProviderModel, LocationProviderErrorModel>>
     ) {
-        val request = LocationRequest.create().apply {
-            interval = INTERVAL
-            fastestInterval = FASTER_INTERVAL
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-
-        }
+        val request = createRequest()
 
         fusedLocation.requestLocationUpdates(request, object : LocationCallback() {
-            override fun onLocationResult(result: LocationResult?) {
+            override fun onLocationResult(result: LocationResult) {
                 super.onLocationResult(result)
 
                 fusedLocation.removeLocationUpdates(this)
-                result?.let { locationResult ->
-                    it.resume(
-                        Result.Success(
-                            convertLocation(
-                                locationResult.lastLocation
-                            )
+                it.resume(
+                    Result.Success(
+                        convertLocation(
+                            result.lastLocation
                         )
                     )
-                } ?: run {
-                    it.resume(createErrorLocationResult())
-                }
+                )
             }
 
-            override fun onLocationAvailability(availability: LocationAvailability?) {
+            override fun onLocationAvailability(availability: LocationAvailability) {
                 super.onLocationAvailability(availability)
 
-                if (availability != null && !availability.isLocationAvailable) {
+                if (!availability.isLocationAvailable) {
                     it.resume(createErrorLocationResult())
                     fusedLocation.removeLocationUpdates(this)
                 }
 
             }
         }, null)
+    }
+
+    private fun createRequest() = LocationRequest.create().apply {
+        interval = INTERVAL
+        fastestInterval = FASTER_INTERVAL
+        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
     }
 
     private fun convertLocation(location: Location) =
