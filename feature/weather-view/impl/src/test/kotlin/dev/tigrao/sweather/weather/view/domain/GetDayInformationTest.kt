@@ -7,6 +7,7 @@ import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 import java.util.*
 import kotlin.math.exp
@@ -15,6 +16,11 @@ class GetDayInformationTest {
 
     private val timeOfDayService = mockk<TimeOfDayService>()
     private val subject = GetDayInformation(timeOfDayService)
+
+    @Before
+    fun setup() {
+        Locale.setDefault(Locale("pt", "BR"))
+    }
 
     @Test
     fun invoke_returnConvertModel() {
