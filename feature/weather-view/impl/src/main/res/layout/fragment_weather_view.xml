@@ -67,6 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:imageResource="@{viewState.weatherView.background}"
             tools:src="@drawable/bg_weather_view_day" />
 
         <View
@@ -198,6 +199,16 @@
             app:layout_constraintStart_toEndOf="@+id/txt_temp_symbol"
             app:layout_constraintTop_toBottomOf="@+id/txt_max_temp"
             tools:text="27°C" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_weather_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_condition"
+            tools:itemCount="5"
+            tools:listitem="@layout/include_weather_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

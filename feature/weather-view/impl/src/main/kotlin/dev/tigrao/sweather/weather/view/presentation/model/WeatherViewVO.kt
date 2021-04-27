@@ -11,6 +11,7 @@ internal data class WeatherViewVO(
     val currentTemp: TemperatureModelVO,
     val minTemp: TemperatureModelVO,
     val maxTemp: TemperatureModelVO,
+    val weatherItemList: List<WeatherItemVO>,
 )
 
 internal data class ConditionModelVO(

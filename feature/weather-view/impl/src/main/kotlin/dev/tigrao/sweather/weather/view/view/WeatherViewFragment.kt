@@ -1,9 +1,11 @@
 package dev.tigrao.sweather.weather.view.view
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
@@ -13,6 +15,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener
 import com.karumi.dexter.listener.single.PermissionListener
+import dev.tigrao.sweather.infra.common.resource.getAttrDimen
 import dev.tigrao.sweather.weather.view.R
 import dev.tigrao.sweather.weather.view.databinding.FragmentWeatherViewBinding
 import dev.tigrao.sweather.weather.view.presentation.WeatherViewViewModel
@@ -34,6 +37,7 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
 
         prepareObserver()
         locationPermission()
+        prepareWeatherConditionList()
     }
 
     private fun prepareObserver() {
@@ -44,9 +48,7 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
                     .load(it.condition.icon)
                     .into(viewBinding.imgCondition)
 
-                viewBinding.imvBg.setImageDrawable(
-                    ContextCompat.getDrawable(requireContext(), it.background)
-                )
+                viewBinding.rvWeatherInfo.adapter = WeatherInfoAdapter(it.weatherItemList)
             }
 
             this.showError.observe(viewLifecycleOwner) { errorVO ->
@@ -58,6 +60,28 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
             this.checkPermission.observe(viewLifecycleOwner) {
                 locationPermission()
             }
+        }
+    }
+
+    private fun prepareWeatherConditionList() {
+        with(viewBinding.rvWeatherInfo) {
+            layoutManager = GridLayoutManager(
+                requireContext(),
+                3,
+            )
+
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(
+                    outRect: Rect,
+                    view: View,
+                    parent: RecyclerView,
+                    state: RecyclerView.State
+                ) {
+                    super.getItemOffsets(outRect, view, parent, state)
+
+                    outRect.top = parent.context.getAttrDimen(R.attr.spacingSM, R.style.Theme_MyApp)
+                }
+            })
         }
     }
 

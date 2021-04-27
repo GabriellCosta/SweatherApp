@@ -37,6 +37,7 @@ dependencies {
     implementation(Dependencies.coreKTX)
     implementation(Dependencies.appCompat)
     implementation(Dependencies.constraintLayout)
+    implementation(Dependencies.recyclerView)
 
     implementation(Dependencies.Kirich.viewBindingProperty)
 

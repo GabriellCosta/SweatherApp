@@ -13,6 +13,7 @@ internal class MapFromWeatherModelToVO(
     private val imageIconUrlFactory: ImageIconUrlFactory,
     private val getDayInformationUseCase: GetDayInformationUseCase,
     private val getBackgroundUseCase: GetBackgroundUseCase,
+    private val weatherListConditionsFactory: WeatherListConditionsFactory,
 ) {
 
     fun mapFrom(from: WeatherLocationModel): WeatherViewVO {
@@ -31,7 +32,8 @@ internal class MapFromWeatherModelToVO(
                     icon = from.weather.conditionIcon,
                 ),
                 name = from.weather.condition,
-            )
+            ),
+            weatherItemList = weatherListConditionsFactory.create(from.weather)
         )
     }
 

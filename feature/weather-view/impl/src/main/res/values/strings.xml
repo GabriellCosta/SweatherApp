@@ -4,4 +4,10 @@
     <string name="generic_error_message">A error occur</string>
 
     <string name="permission_not_granted_error">We need the location permission to work :(</string>
+
+    <string name="weather_condition_humidity">Humidity</string>
+    <string name="weather_condition_pressure">Pressure</string>
+    <string name="weather_condition_wind">Wind</string>
+    <string name="weather_condition_sunrise">Sunrise</string>
+    <string name="weather_condition_sunset">Sunset</string>
 </resources>
