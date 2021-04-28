@@ -88,9 +88,10 @@ internal class FetchWeatherDataByGeoLocation(
     }
 
     private fun dateConverter(milli: Long): String {
-        val dateFormat = SimpleDateFormat(HOUR_PATTERN, Locale.getDefault())
+        val default = Locale.getDefault()
+        val dateFormat = SimpleDateFormat(HOUR_PATTERN, default)
 
-        return Calendar.getInstance().run {
+        return Calendar.getInstance(default).run {
             timeInMillis = milli * 1000
             dateFormat.format(this.time)
         }

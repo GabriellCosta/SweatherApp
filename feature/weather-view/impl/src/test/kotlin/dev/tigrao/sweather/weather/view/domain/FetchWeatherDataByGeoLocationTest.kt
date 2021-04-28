@@ -23,6 +23,7 @@ class FetchWeatherDataByGeoLocationTest {
     @Before
     fun setup() {
         Locale.setDefault(Locale("pt", "BR"))
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"))
     }
 
     @Test
