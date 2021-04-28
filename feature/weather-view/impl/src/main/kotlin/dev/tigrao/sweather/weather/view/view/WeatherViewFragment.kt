@@ -53,7 +53,9 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
 
             this.showError.observe(viewLifecycleOwner) { errorVO ->
                 viewBinding.btnTryAgain.setOnClickListener {
-                    errorVO.action?.invoke()
+                    errorVO.action?.let { action ->
+                        viewModel.dispatch(action)
+                    }
                 }
             }
 

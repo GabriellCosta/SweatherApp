@@ -8,7 +8,7 @@ internal class WeatherViewState {
     val weatherView = MutableLiveData<WeatherViewVO>()
 
     val showLoading = MutableLiveData<Boolean>()
-    val showError = MutableLiveData<ErrorMessageVO>()
+    val showError = MutableLiveData<ErrorMessageVO<WeatherViewAction>>()
     val showLayout = MutableLiveData<Boolean>()
 
     val checkPermission = SingleEventLiveData<Unit>()

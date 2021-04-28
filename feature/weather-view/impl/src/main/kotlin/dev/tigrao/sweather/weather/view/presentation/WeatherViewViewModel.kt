@@ -40,10 +40,9 @@ internal class WeatherViewViewModel(
                 visible = true,
                 nativeStringType = NativeStringType(
                     res = R.string.permission_not_granted_error
-                )
-            ) {
-                dispatch(WeatherViewAction.CheckPermission)
-            }
+                ),
+                WeatherViewAction.CheckPermission
+            )
         )
     }
 
@@ -70,9 +69,8 @@ internal class WeatherViewViewModel(
                             nativeStringType = NativeStringType(
                                 res = R.string.permission_not_granted_error
                             ),
-                        ) {
-                            dispatch(WeatherViewAction.TryAgain)
-                        }
+                            WeatherViewAction.TryAgain,
+                        )
                     )
                 }
         }
@@ -87,9 +85,8 @@ internal class WeatherViewViewModel(
                 nativeStringType = NativeStringType(
                     res = R.string.permission_not_granted_error
                 ),
-            ) {
-                dispatch(WeatherViewAction.TryAgain)
-            }
+                WeatherViewAction.TryAgain,
+            )
         )
     }
 }
