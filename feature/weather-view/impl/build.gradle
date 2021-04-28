@@ -26,6 +26,7 @@ dependencies {
     implementation(project(Modules.Infrastructure.common))
     implementation(project(Modules.DesignSystem.tokens))
     implementation(project(Modules.DesignSystem.core))
+    implementation(project(Modules.Library.Network.public))
 
     Dependencies.Moshi.addLibs(project)
     implementation(Dependencies.retrofit)
