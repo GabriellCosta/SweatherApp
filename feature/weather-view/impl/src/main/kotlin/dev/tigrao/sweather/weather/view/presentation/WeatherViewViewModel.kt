@@ -67,7 +67,7 @@ internal class WeatherViewViewModel(
                         ErrorMessageVO(
                             visible = true,
                             nativeStringType = NativeStringType(
-                                res = R.string.permission_not_granted_error
+                                res = R.string.generic_error_message,
                             ),
                             WeatherViewAction.TryAgain,
                         )
@@ -82,10 +82,6 @@ internal class WeatherViewViewModel(
         viewState.showError.postValue(
             ErrorMessageVO(
                 visible = false,
-                nativeStringType = NativeStringType(
-                    res = R.string.permission_not_granted_error
-                ),
-                WeatherViewAction.TryAgain,
             )
         )
     }

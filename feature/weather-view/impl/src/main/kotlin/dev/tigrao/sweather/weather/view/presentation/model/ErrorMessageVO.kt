@@ -4,6 +4,6 @@ import dev.tigrao.sweather.infra.binds.NativeStringType
 
 data class ErrorMessageVO<T>(
     val visible: Boolean,
-    val nativeStringType: NativeStringType,
-    val action: T?,
+    val nativeStringType: NativeStringType? = null,
+    val action: T? = null,
 )
