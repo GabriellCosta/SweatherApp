@@ -43,6 +43,7 @@ dependencies {
 
     implementation(Dependencies.Ciceroni.library)
     implementation(Dependencies.imageFetcher)
+    kapt(Dependencies.glideCompiler)
     implementation(Dependencies.Dexter.library)
 
     implementation(Dependencies.GooglePlay.location)

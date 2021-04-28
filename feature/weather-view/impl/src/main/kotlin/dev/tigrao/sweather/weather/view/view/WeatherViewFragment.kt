@@ -105,9 +105,6 @@ internal class WeatherViewFragment : Fragment(R.layout.fragment_weather_view) {
                 ) {
                     DialogOnDeniedPermissionListener.Builder
                         .withContext(context)
-                        .withTitle("Camera permission")
-                        .withMessage("Camera permission is needed to take pictures of your cat")
-                        .withButtonText(android.R.string.ok)
                         .build()
                         .onPermissionRationaleShouldBeShown(p0, p1)
                 }
