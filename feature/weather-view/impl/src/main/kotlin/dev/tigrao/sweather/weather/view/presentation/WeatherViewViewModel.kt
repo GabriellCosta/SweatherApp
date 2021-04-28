@@ -11,11 +11,10 @@ import dev.tigrao.sweather.weather.view.presentation.model.WeatherViewState
 import kotlinx.coroutines.launch
 
 internal class WeatherViewViewModel(
+    val viewState: WeatherViewState,
     private val fetchWeatherDataByGeoLocationUseCase: FetchWeatherDataByGeoLocationUseCase,
     private val mapFromWeatherModelToVO: MapFromWeatherModelToVO,
 ) : ViewModel() {
-
-    val viewState: WeatherViewState = WeatherViewState()
 
     init {
         initState()

@@ -50,4 +50,6 @@ dependencies {
     testImplementation(TestDependencies.jUnit)
     testImplementation(TestDependencies.mockk)
     testImplementation(TestDependencies.roboletric)
+    testImplementation(TestDependencies.androidXArchCoreTest)
+    testImplementation(Dependencies.Coroutines.test)
 }
