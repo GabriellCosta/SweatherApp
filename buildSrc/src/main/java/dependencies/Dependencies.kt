@@ -106,9 +106,6 @@ object Dependencies {
     const val imageFetcher = "com.github.bumptech.glide:glide:${Versions.imageFetcher}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.imageFetcher}"
 
-    const val navigation = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
-
     object Kirich {
         private const val VERSION = "1.4.1"
 
